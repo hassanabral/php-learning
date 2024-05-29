@@ -21,33 +21,40 @@
       [
         'name' => 'Book 1',
         'author' => 'Philip K. Dick',
+        'releaseYear' => 1968,
         'purchaseUrl' => 'http://example.com'
       ],
       [
         'name' => 'Book 2',
         'author' => 'John Doe',
+        'releaseYear' => 1973,
         'purchaseUrl' => 'http://example.com'
       ]
     ];
 
-    function filterByAuthor($books, $authorName) {
-      $filteredBooks = [];
+    function filter($items, $fn) {
+      $filteredItems = [];
 
-      foreach($books as $book) {
-        if ($book['author'] === $authorName) {
-          $filteredBooks[] = $book;
+      foreach($items as $item) {
+        if ($fn($item)) {
+          $filteredItems[] = $item;
         }
       }
 
-      return $filteredBooks;
+      return $filteredItems;
 
   }
+
+  $filteredBooks = array_filter($books, function($book) {
+    return $book['releaseYear'] === 1968;
+  })
+
   ?>
 
   <ul>
     <?php
 
-    $filteredBooks = filterByAuthor($books, "John Doe");
+    $filteredBooks = filterBooks($books, "John Doe");
 
     foreach ($filteredBooks as $book) {
         echo "<li>{$book['name']} by {$book['author']}</li>";
