@@ -10,6 +10,12 @@ function dd($value) {
 //  die();
 }
 
-function utlIs($value) {
+function utlIs($value) : bool {
   return $_SERVER['REQUEST_URI'] === $value;
+}
+
+function authorized($condition, $status = Response::FORBIDDEN): void {
+  if (!$condition) {
+    abort($status);
+  }
 }

@@ -1,6 +1,7 @@
 <?php
 class Database {
   private PDO $connection;
+  private PDOStatement $statement;
 
   public function __construct($config, $username = 'root', $password = '') {
     $dsn = 'mysql:' . http_build_query($config, '', ';');
@@ -13,10 +14,32 @@ class Database {
       dd($ex);
     }
   }
-  public function query($query, $params = []) {
-    $statement = $this->connection->prepare($query);
-    $statement->execute($params);
+  public function query($query, $params = []): Database {
+    $this->statement = $this->connection->prepare($query);
+    $this->statement->execute($params);
 
-    return $statement;
+    return $this;
+  }
+
+  public function findOrFail(): mixed
+  {
+    $data = $this->statement->fetch();
+
+    if (!$data) {
+      abort();
+    }
+
+    return $data;
+  }
+
+  public function findAllOrFail(): false|array
+  {
+    $data = $this->statement->fetchAll();
+
+    if (!$data) {
+      abort();
+    }
+
+    return $data;
   }
 }
