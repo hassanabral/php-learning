@@ -1,13 +1,13 @@
 <?php require('partials/heading.php') ?>
 <?php require('partials/nav.php') ?>
 
-<?php $heading = "404" ?>
+<?php $heading = "403" ?>
 
 <?php require('partials/banner.php') ?>
 
 <main>
   <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-    <p>Sorry, page not found.</p>
+    <p>You're not authorized to access this note.</p>
   </div>
 </main>
 

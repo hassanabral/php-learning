@@ -1,6 +1,6 @@
 <?php
 class Database {
-  private $connection;
+  private PDO $connection;
 
   public function __construct($config, $username = 'root', $password = '') {
     $dsn = 'mysql:' . http_build_query($config, '', ';');
