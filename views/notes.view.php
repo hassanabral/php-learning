@@ -9,9 +9,13 @@
     <br>
     <ol>
       <?php foreach($notes as $note) : ?>
-        <li><a href="note?id=<?= $note['id'] ?>" class="text-blue-500 hover:underline"><?= $note['title'] ?></a></li>
+        <li><a href="note?id=<?= $note['id'] ?>" class="text-blue-500 hover:underline"><?= htmlspecialchars($note['title']) ?></a></li>
       <?php endforeach; ?>
     </ol>
+    <br>
+    <p>
+      <a href="/notes/create" class="text-blue-500 hover:underline">Create Note</a>
+    </p>
   </div>
 </main>
 
