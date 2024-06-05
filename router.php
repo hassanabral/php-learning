@@ -1,7 +1,5 @@
 <?php
 
-$routes = require('routes.php');
-
 function routeToController($path, $routes) {
   if (array_key_exists($path, $routes)) {
     require $routes[$path];
@@ -16,3 +14,9 @@ function abort($code = Response::NOT_FOUND, $errors = []) {
 
   die();
 }
+
+$routes = require('routes.php');
+$uri = parse_url($_SERVER['REQUEST_URI']);
+$path = $uri['path'];
+
+routeToController($path, $routes);
