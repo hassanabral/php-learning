@@ -8,10 +8,14 @@ $db = new Database($config['database']);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $title = $_POST['title'];
-  $body = $_POST['body'];
+  $validator = new Validator($_POST);
 
-  ['isValid' => $isValid, 'errors' => $errors] = validate($title, $body);
+  $errors = $validator->validate([
+    'title' => 'required|min:1|max:1000',
+    'body' => 'required|min:1|max:1000',
+  ]);
+
+  $isValid = empty($errors);
 
   $currentUserId = 1;
 
@@ -20,29 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       ['title' => $_POST['title'], 'body' => $_POST['body'], 'user_id' => $currentUserId]);
   }
 
-}
-
-function validate($title, $body): array {
-  $errors = [];
-
-  if (strlen($title) === 0) {
-    $errors['title'] = 'Title is required';
-  }
-  if (strlen($body) === 0) {
-    $errors['body'] = 'Body is required';
-  }
-
-  $MAX_CHARS = 1000;
-
-  if (strlen($title) > $MAX_CHARS) {
-    $errors['title'] = "Title can not be more than {$MAX_CHARS}";
-  }
-
-  if (strlen($body) > $MAX_CHARS) {
-    $errors['body'] = "Body can not be more than {$MAX_CHARS}";
-  }
-
-  return ['isValid' => empty($errors), 'errors' => $errors];
 }
 
 
