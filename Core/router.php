@@ -2,7 +2,7 @@
 
 function routeToController($path, $routes) {
   if (array_key_exists($path, $routes)) {
-    require $routes[$path];
+    require base_path($routes[$path]);
   } else {
     abort();
   }
@@ -10,12 +10,12 @@ function routeToController($path, $routes) {
 
 function abort($code = Response::NOT_FOUND, $errors = []) {
   http_response_code($code);
-  require "views/{$code}.view.php";
+  require base_path("views/{$code}.view.php");
 
   die();
 }
 
-$routes = require('routes.php');
+$routes = require base_path('routes.php');
 $uri = parse_url($_SERVER['REQUEST_URI']);
 $path = $uri['path'];
 
