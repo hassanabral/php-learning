@@ -10,7 +10,7 @@ function routeToController($path, $routes) {
   }
 }
 
-function abort($code = Response::NOT_FOUND) {
+function abort($code = Response::NOT_FOUND, $errors = []) {
   http_response_code($code);
   require "views/{$code}.view.php";
 
