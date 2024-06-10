@@ -27,10 +27,10 @@ class Router {
     $this->add('PUT', $uri, $controller);
   }
 
-  public function route($uri, $method): void {
+  public function route($uri, $method) {
     foreach($this->routes as $route) {
       if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
-       require require base_path($route['controller']);
+       return require base_path($route['controller']);
       }
     }
     $this->abort();
