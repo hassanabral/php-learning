@@ -7,11 +7,16 @@
     <h3><strong><?= htmlspecialchars($note['title']) ?></strong></h3>
     <br>
     <p><?= htmlspecialchars($note['body']) ?></p>
-    <form method="POST" class="mt-2">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="hidden" name="id" value="<?= $note['id'] ?>">
-      <button class="text-sm -text-red-500">Delete</button>
-    </form>
+    <footer class="mt-6">
+      <div class="mb-4">
+        <a href="/note/edit?id=<?= $note['id'] ?>" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Edit</a>
+      </div>
+      <form method="POST" action="/note">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="id" value="<?= $note['id'] ?>">
+        <button class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Delete</button>
+      </form>
+    </footer>
   </div>
 </main>
 
