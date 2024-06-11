@@ -40,3 +40,7 @@ function abort($code = Response::NOT_FOUND) {
 
   die();
 }
+
+function capitalizeFirstLetter($str): string {
+  return strtoupper($str[0]) . substr($str, 1);
+}

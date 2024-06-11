@@ -28,6 +28,16 @@ class Database {
     return $this;
   }
 
+  public function find()
+  {
+    return $this->statement->fetch();
+  }
+
+  public function findAll(): array
+  {
+    return $this->statement->fetchAll();
+  }
+
   public function findOrFail(): mixed
   {
     $data = $this->statement->fetch();
