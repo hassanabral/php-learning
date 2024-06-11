@@ -5,9 +5,10 @@ namespace Core\Middleware;
 class Middleware
 {
   /**
-   * @throws \Exception
+   * @throws \Exception If $middlewareClass doesn't implement IMiddleware interface.
    */
-  public static function resolve($middlewareClass) {
+  public static function resolve($middlewareClass): void
+  {
 
     if (!$middlewareClass || !class_exists($middlewareClass)) {
       return;

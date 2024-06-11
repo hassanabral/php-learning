@@ -41,8 +41,7 @@ if (!$isValid) {
 $db->query("update notes set title = :title, body = :body where id = :id",
   ['title' => $_POST['title'], 'body' => $_POST['body'], 'id' => $noteId]);
 
-header("location: /note?id={$note['id']}");
-die();
+redirect("/note?id={$note['id']}");
 
 
 

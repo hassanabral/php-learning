@@ -26,8 +26,8 @@ if (!$isValid) {
 $db->query("INSERT INTO notes (title, body, user_id) VALUES(:title, :body, :user_id)",
   ['title' => $_POST['title'], 'body' => $_POST['body'], 'user_id' => $currentUserId]);
 
-header('location: /notes');
-die();
+redirect("/notes");
+
 
 
 

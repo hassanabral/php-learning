@@ -44,3 +44,17 @@ function abort($code = Response::NOT_FOUND) {
 function capitalizeFirstLetter($str): string {
   return strtoupper($str[0]) . substr($str, 1);
 }
+
+
+function login($user): void
+{
+  $_SESSION['user'] = [
+    'email' => $user['email']
+  ];
+}
+
+function redirect($path)
+{
+  header("location: {$path}");
+  exit();
+}

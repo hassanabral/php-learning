@@ -19,3 +19,6 @@ $router->post('/notes', 'controllers/notes/store.php')->only(Authenticated::clas
 
 $router->get('/register', 'controllers/registration/create.php')->only(Guest::class);
 $router->post('/register', 'controllers/registration/store.php')->only(Guest::class);
+
+$router->get('/login', 'controllers/sessions/create.php')->only(Guest::class);
+$router->post('/sessions', 'controllers/sessions/store.php')->only(Guest::class);

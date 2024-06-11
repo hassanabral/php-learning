@@ -26,22 +26,17 @@ $db = App::resolve(Database::class);
 $user = $db->query("select * from users where email = :email", ['email' => $_POST['email']])->find();
 
 if ($user) {
-  // if yes, redirect to login page
-  header('location: /');
-  exit();
+  redirect('/login');
 }
 
 // save user into database
 // save on to the database, log user in, and redirect
 $db->query("INSERT INTO users(email, password) VALUES(:email, :password)",
-  ['email' => $_POST['email'], 'password' => $_POST['password']]);
+  ['email' => $_POST['email'], 'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)]);
 
-$_SESSION['user'] = [
-  'email' => $_POST['email'],
-];
+login(['email' => $_POST['email']]);
 
-header('location: /');
-die();
+redirect('/');
 
 
 
